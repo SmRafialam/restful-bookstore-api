@@ -5,6 +5,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import Knex from 'knex';
 import knexConfig from '../knexfile';
+import authorRoutes from './routes/authorRoutes';
+import bookRoutes from './routes/bookRoutes';
 
 dotenv.config();
 
@@ -12,8 +14,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-// app.use('/api', authorRoutes);
-// app.use('/api', bookRoutes);
+app.use('/api', authorRoutes);
+app.use('/api', bookRoutes);
 
 // app.use(errorHandler);
 

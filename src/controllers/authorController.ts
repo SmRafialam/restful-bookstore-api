@@ -33,7 +33,7 @@ class AuthorController {
     try{
       const author = req.body;
       const ids = await AuthorModel.create(author);
-      res.status(201).json({ id: ids[0] });
+      res.status(201).json({ message: 'Successfully created authors' });
     }catch(error){
       console.log(error);
       res.status(500).json({ message: 'Error fetching authors', error });
