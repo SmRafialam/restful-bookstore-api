@@ -1,5 +1,4 @@
 ﻿# restful-bookstore-api
-
 This is a RESTful API for a bookstore, built using TypeScript, Express, and MySQL.
 
 Prerequisites
