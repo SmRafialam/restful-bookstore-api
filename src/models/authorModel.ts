@@ -72,6 +72,11 @@ class AuthorModel {
       )
       .where('authors.id', id);
   }
+
+  static async getBooksByAuthor(id: number): Promise<any> {
+    return db('books').where({ author_id: id });
+  }
+  
 }
 
 export default AuthorModel;

@@ -10,9 +10,6 @@ interface Book {
 }
 
 class BookModel {
-  // static async getAll(): Promise<Book[]> {
-  //   return db('books').select('*');
-  // }
 
   static async getAll(page: number, limit: number, search: string): Promise<any> {
     const offset = (page - 1) * limit;
@@ -48,21 +45,11 @@ class BookModel {
   }
 
   static async getByAuthorId(authorId: number) {
-    return knex('books').where('author_id', authorId);
+    return db('books').where('author_id', authorId).select();
   }
 
-  static async getBookWithAuthor(id: number): Promise<any> {
-    return db('books')
-      .leftJoin('authors', 'books.author_id', 'authors.id')
-      .select(
-        'books.id as book_id',
-        'books.title as book_title',
-        'books.published_date',
-        'authors.id as author_id',
-        'authors.name as author_name',
-        'authors.birthdate'
-      )
-      .where('books.id', id);
+  static async getBookWithAuthor(authorId: number): Promise<any> {
+    return db('books').where('author_id', authorId).select();
   }
 }
 

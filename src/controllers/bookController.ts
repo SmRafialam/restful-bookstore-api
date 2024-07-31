@@ -31,7 +31,7 @@ class BookController {
     try {
       const book = req.body;
       const ids = await BookModel.create(book);
-      res.status(201).json({ id: ids[0] });
+      res.status(201).json({ message: 'Successfully created books' });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Error creating book', error });
@@ -75,6 +75,7 @@ class BookController {
 
   static async getBookWithAuthor(req: Request, res: Response): Promise<void> {
     const id = Number(req.params.id);
+
     try {
       const bookWithAuthor = await BookModel.getBookWithAuthor(id);
       if (bookWithAuthor) {

@@ -49,9 +49,11 @@ class AuthorController {
       if (updated) {
         res.json({ message: 'Author updated' });
       } else {
+        console.log(updated);
         res.status(404).json({ message: 'Author not found' });
       }
     }catch(error){
+      console.log(error)
       res.status(500).json({ message: 'Error fetching authors', error });
 
     }
@@ -74,17 +76,18 @@ class AuthorController {
   }
   
   static async getBooksByAuthor(req: Request, res: Response): Promise<void> {
-    try{
+    try {
       const authorId = Number(req.params.id);
+      console.log('Fetching books for author ID:', authorId);
       const books = await BookModel.getByAuthorId(authorId);
+      console.log('Books fetched:', books);
       res.json(books);
-    }catch(error){
-      res.status(500).json({ message: 'Error fetching authors', error });
-
+    } catch (error) {
+      console.error('Error fetching books by author:', error);
+      res.status(500).json({ message: 'Error fetching books by author', error });
     }
-    
   }
-
+  
   static async getAllAuthorsWithBooks(req: Request, res: Response): Promise<void> {
     try {
       const authorsWithBooks = await AuthorModel.getAllAuthorsWithBooks();
